@@ -66,7 +66,7 @@ def get_mdns_name(ip):
     try:
         result = subprocess.run(
             ['avahi-resolve', '-a', str(ip)],
-            stdout=subprocess.PIPE, stderr=subprocess.DEVNULL, timeout=5.0, text=True
+            stdout=subprocess.PIPE, stderr=subprocess.DEVNULL, timeout=5.0, universal_newlines=True
         )
         if result.returncode == 0 and result.stdout:
             parts = result.stdout.strip().split()
