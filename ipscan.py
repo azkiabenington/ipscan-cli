@@ -27,7 +27,7 @@ def is_alive(ip):
     except Exception:
         return False
 
-def get_netbios_name(ip, timeout=0.5):
+def get_netbios_name(ip, timeout=2.0):
     trn_id = b'\x12\x34'
     flags = b'\x00\x00'
     qdcount = b'\x00\x01'
@@ -66,7 +66,7 @@ def get_mdns_name(ip):
     try:
         result = subprocess.run(
             ['avahi-resolve', '-a', str(ip)],
-            stdout=subprocess.PIPE, stderr=subprocess.DEVNULL, timeout=1.0, text=True
+            stdout=subprocess.PIPE, stderr=subprocess.DEVNULL, timeout=5.0, text=True
         )
         if result.returncode == 0 and result.stdout:
             parts = result.stdout.strip().split()
